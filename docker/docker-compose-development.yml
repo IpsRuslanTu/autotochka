@@ -11,3 +11,32 @@ services:
     volumes:
       - ../client:/app
       - /app/node_modules
+
+  autotochka-server:
+    build:
+      context: ../server
+      dockerfile: ./docker/Dockerfile
+    container_name: autotochka-server
+    ports:
+      - "4000:3000"
+    volumes:
+      - ../server:/app
+      - /app/node_modules
+    depends_on:
+      - autotochka-db
+
+  autotochka-db:
+    image: postgres:16-alpine
+    container_name: autotochka-db
+    restart: unless-stopped
+    ports:
+      - "6432:5432"
+    environment:
+      POSTGRES_DB: tochka
+      POSTGRES_USER: tochka
+      POSTGRES_PASSWORD: tochka
+    volumes:
+      - autotochka-db-data:/var/lib/postgresql/data
+
+volumes:
+  autotochka-db-data:
