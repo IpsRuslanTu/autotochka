@@ -16,19 +16,29 @@ services:
     build:
       context: ../server
       dockerfile: ./docker/Dockerfile
+      args:
+        HTTP_PROXY_URL: ${HTTP_PROXY_URL}
+        HTTPS_PROXY_URL: ${HTTPS_PROXY_URL}
     container_name: autotochka-server
     ports:
       - "4000:3000"
     volumes:
       - ../server:/app
       - /app/node_modules
+    env_file:
+      - .env
+    environment:
+      - HTTP_PROXY=${HTTP_PROXY_URL}
+      - HTTPS_PROXY=${HTTPS_PROXY_URL}
+      - http_proxy=${HTTP_PROXY_URL}
+      - https_proxy=${HTTPS_PROXY_URL}
+      - DATABASE_URL=${DATABASE_URL}
     depends_on:
       - autotochka-db
 
   autotochka-db:
     image: postgres:16-alpine
     container_name: autotochka-db
-    restart: unless-stopped
     ports:
       - "6432:5432"
     environment:
