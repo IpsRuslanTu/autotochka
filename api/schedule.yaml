@@ -1,0 +1,56 @@
+openapi: 3.0.0
+paths:
+  /api/schedule:
+    get:
+      operationId: getMonthSchedule
+      parameters:
+        - description: Year (2025–2100)
+          name: year
+          in: query
+          required: true
+          schema:
+            type: number
+        - description: Month (1–12)
+          name: month
+          in: query
+          required: true
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GetMonthScheduleResponseDto"
+      summary: ""
+      tags:
+        - Schedule
+info:
+  title: schedule API
+  description: API for schedule module
+  version: "1.0"
+  contact: {}
+tags:
+  - name: schedule
+    description: ""
+servers: []
+components:
+  schemas:
+    GetMonthScheduleResponseDto:
+      type: object
+      properties:
+        id:
+          type: number
+        date:
+          type: string
+          example: 2025-12-25
+          format: date
+        isAvailable:
+          type: boolean
+      required:
+        - id
+        - date
+        - isAvailable

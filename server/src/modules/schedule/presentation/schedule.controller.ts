@@ -1,16 +1,25 @@
-import {Controller, Get, Query} from '@nestjs/common';
+import {Controller, Get} from '@nestjs/common';
 import { GetMonthScheduleResponseDto } from './dto/get-month-schedule.response.dto';
 import {GetMonthScheduleRequestDto} from "./dto/get-month-schedule.request.dto";
-import {GetMonthScheduleUseCase} from "@/modules/schedule/application/use-cases/get-month-schedule.usecase";
+import {GetMonthScheduleUseCase} from "../application/use-cases/get-month-schedule.usecase";
+import {ApiOperation, ApiQuery, ApiResponse} from "@nestjs/swagger";
 
-@Controller('schedule')
+@Controller('api/schedule')
 export class ScheduleController {
   constructor(
     private readonly getMonthScheduleUseCase: GetMonthScheduleUseCase,
   ) {}
 
   @Get()
-  async getMonthSchedule(@Query() query: GetMonthScheduleRequestDto): Promise<GetMonthScheduleResponseDto[]> {
+  @ApiOperation({
+    operationId: 'getMonthSchedule'
+  })
+  @ApiQuery({ type: GetMonthScheduleRequestDto })
+  @ApiResponse({
+    status: 200,
+    type: [GetMonthScheduleResponseDto],
+  })
+  async getMonthSchedule(query: GetMonthScheduleRequestDto): Promise<GetMonthScheduleResponseDto[]> {
     const days = await this.getMonthScheduleUseCase.execute(query.year, query.month);
 
     return days.map(d => ({

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import {PrismaService} from "@/infrastructure/prisma/prisma.service";
-import {WorkDay} from "@/modules/schedule/domain/entities/work-day.entity";
-import {WorkDayRepository} from "@/modules/schedule/domain/repositories/work-day.repository";
+import {PrismaService} from "../../../../infrastructure/prisma/prisma.service";
+import {WorkDay} from "../../domain/entities/work-day.entity";
+import {WorkDayRepository} from "../../domain/repositories/work-day.repository";
 
 @Injectable()
 export class PrismaWorkDayRepository implements WorkDayRepository {
