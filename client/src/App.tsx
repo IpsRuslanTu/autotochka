@@ -1,9 +1,12 @@
 import './App.css'
+import MonthSchedulePage from "./pages/MonthSchedulePage/MonthSchedulePage.tsx";
 
 function App() {
   return (
     <>
-      Client
+      Test
+
+      <MonthSchedulePage />
     </>
   )
 }
