@@ -9,7 +9,7 @@ export const axiosInstance = axios.create({
 
 export const createInstance = async <T>(
   config: AxiosRequestConfig,
-  options?: AxiosRequestConfig,
+  options?: AxiosRequestConfig
 ): Promise<T> => {
   const r = await axiosInstance({
     ...config,
@@ -19,4 +19,4 @@ export const createInstance = async <T>(
   return r.data
 }
 
-export type BodyType<Data> = Data;
+export type BodyType<Data> = Data
