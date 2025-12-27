@@ -1,8 +1,8 @@
 import { createRoot } from 'react-dom/client'
-import './styles/index.css'
 import { BrowserRouter } from 'react-router-dom'
+import { AppRouter } from './providers/AppRouter/ui/AppRouter.tsx'
 import { ReactQueryProvider } from './providers/ReactQueryProvider'
-import AppRouter from './providers/AppRouter/ui/AppRouter.tsx'
+import './styles/index.css'
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
