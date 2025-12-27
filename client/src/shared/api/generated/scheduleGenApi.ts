@@ -5,35 +5,38 @@
  * API for schedule module
  * OpenAPI spec version: 1.0
  */
-import { createInstance } from '../apiInstance';
+import { createInstance } from '../apiInstance'
 export interface GetMonthScheduleResponseDto {
-  id: number;
-  date: string;
-  isAvailable: boolean;
+  id: number
+  date: string
+  isAvailable: boolean
 }
 
 export type GetMonthScheduleParams = {
-/**
- * Year (2025–2100)
- */
-year: number;
-/**
- * Month (1–12)
- */
-month: number;
-};
+  /**
+   * Year (2025–2100)
+   */
+  year: number
+  /**
+   * Month (1–12)
+   */
+  month: number
+}
 
-type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
+type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1]
 
+export const getMonthSchedule = (
+  params: GetMonthScheduleParams,
+  options?: SecondParameter<
+    typeof createInstance<GetMonthScheduleResponseDto[]>
+  >
+) => {
+  return createInstance<GetMonthScheduleResponseDto[]>(
+    { url: `/api/schedule`, method: 'GET', params },
+    options
+  )
+}
 
-  export const getMonthSchedule = (
-    params: GetMonthScheduleParams,
- options?: SecondParameter<typeof createInstance<GetMonthScheduleResponseDto[]>>,) => {
-      return createInstance<GetMonthScheduleResponseDto[]>(
-      {url: `/api/schedule`, method: 'GET',
-        params
-    },
-      options);
-    }
-  
-export type GetMonthScheduleResult = NonNullable<Awaited<ReturnType<typeof getMonthSchedule>>>
+export type GetMonthScheduleResult = NonNullable<
+  Awaited<ReturnType<typeof getMonthSchedule>>
+>

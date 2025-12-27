@@ -1,3 +1,3 @@
 export const queryKeys = {
-  SCHEDULE_MONTH: 'schedule_month'
+  SCHEDULE_MONTH: 'schedule_month',
 }
