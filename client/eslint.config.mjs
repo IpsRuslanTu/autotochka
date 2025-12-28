@@ -26,6 +26,7 @@ export default defineConfig([
       import: eslintPluginImport,
     },
     rules: {
+      'jsx-quotes': 'off',
       'import/order': [
         'warn',
         {
