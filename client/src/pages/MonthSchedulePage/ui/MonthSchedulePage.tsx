@@ -1,22 +1,70 @@
-import { useMemo } from 'react'
 import { useSearchParams } from 'react-router'
+import { WorkdayCalendar } from '@/widgets/WorkdayCalendar'
 import { useMonthSchedule } from '@/entities/schedule'
+import { months } from '@/shared/lib/months.ts'
+import { prepareCalendarGrid } from '../helpers/prepareCalendarGrid.ts'
 
 const MonthSchedulePage = () => {
-  const [searchParams] = useSearchParams()
+  const now = new Date()
 
-  const month = useMemo(() => {
-    return {
-      month: 12,
-      year: 2025,
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const urlMonth = searchParams.get('month')
+  const filters = {
+    year: Number(searchParams.get('year')) || now.getFullYear(),
+    month: urlMonth ? Number(urlMonth) : now.getMonth() + 1,
+  }
+
+  const { schedule } = useMonthSchedule(filters)
+  const calendar = prepareCalendarGrid(filters.year, filters.month, schedule)
+
+  const handleBack = () => {
+    const params = new URLSearchParams(searchParams)
+
+    if (filters.month - 1 < 1) {
+      params.set('year', String(filters.year - 1))
+      params.set('month', '12')
+    } else {
+      params.set('month', String(filters.month - 1))
     }
-  }, [searchParams])
 
-  const { schedule } = useMonthSchedule(month)
+    setSearchParams(params)
+  }
 
-  console.log(schedule)
+  const handleForward = () => {
+    const params = new URLSearchParams(searchParams)
 
-  return <div>MonthSchedulePage</div>
+    if (filters.month + 1 > 12) {
+      params.set('year', String(filters.year + 1))
+      params.set('month', '1')
+    } else {
+      params.set('month', String(filters.month + 1))
+    }
+
+    setSearchParams(params)
+  }
+
+  return (
+    <div className='h-full flex justify-center flex-col items-center p-6'>
+      <h1 className='text-4xl font-bold text-blue-700 mb-2'>
+        Автосервис Точка
+      </h1>
+      <div className='flex items-center gap-4 mb-8'>
+        <button onClick={handleBack}>{`<`}</button>
+        <h2 className='text-2xl text-gray-700 capitalize'>
+          {months[filters.month - 1]}
+        </h2>
+        <button onClick={handleForward}>{`>`}</button>
+      </div>
+      <div className='min-h-[360px]'>
+        {calendar && <WorkdayCalendar calendar={calendar} />}
+        {!calendar && <div className='text-white'>Нет записи</div>}
+      </div>
+      <div className='mt-10 text-center text-gray-500'>
+        Выберите день для записи
+      </div>
+    </div>
+  )
 }
 
 export default MonthSchedulePage

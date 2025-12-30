@@ -8,10 +8,12 @@ export class ScheduleApi {
   ): Promise<WorkDay[]> {
     const res = await getMonthSchedule({ year, month })
 
-    return res.map((i) => ({
-      id: i.id,
-      date: new Date(i.date),
-      isAvailable: i.isAvailable,
-    }))
+    return res
+      .sort((a, b) => a.date.localeCompare(b.date))
+      .map((i) => ({
+        id: i.id,
+        date: new Date(i.date),
+        isAvailable: i.isAvailable,
+      }))
   }
 }

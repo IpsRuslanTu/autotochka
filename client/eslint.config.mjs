@@ -65,7 +65,7 @@ export default defineConfig([
               position: 'before',
             },
             {
-              pattern: '@/entity/**',
+              pattern: '@/entities/**',
               group: 'internal',
               position: 'before',
             },
