@@ -14,7 +14,6 @@ export default defineConfig([
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,
-      eslintPluginPrettierRecommended,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
     ],
@@ -24,20 +23,14 @@ export default defineConfig([
     },
     plugins: {
       import: eslintPluginImport,
+      prettier: tseslint.plugin(eslintPluginPrettierRecommended.plugins.prettier),
     },
     rules: {
-      'jsx-quotes': 'off',
+      'prettier/prettier': 'error',
       'import/order': [
         'warn',
         {
-          groups: [
-            'builtin',
-            'external',
-            'internal',
-            'parent',
-            'sibling',
-            'index',
-          ],
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
           pathGroups: [
             {
               pattern: 'react',
