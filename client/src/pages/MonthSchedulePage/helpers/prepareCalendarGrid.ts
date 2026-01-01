@@ -1,10 +1,6 @@
-import type { WorkDay } from '@/entities/schedule/model/types/WorkDay.ts'
+import type { WorkDay } from '@/entities/schedule'
 
-export const prepareCalendarGrid = (
-  year: number,
-  month: number,
-  workDays?: WorkDay[]
-) => {
+export const prepareCalendarGrid = (year: number, month: number, workDays?: WorkDay[]) => {
   if (!workDays || workDays.length === 0) {
     return undefined
   }
@@ -13,6 +9,8 @@ export const prepareCalendarGrid = (
   const indent = day === 0 ? 6 : day - 1
 
   const indentArr = Array.from({ length: indent }, () => null)
+
+  console.log(year, month)
 
   return [...indentArr, ...workDays]
 }

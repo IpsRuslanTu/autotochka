@@ -1,9 +1,9 @@
-import { Module } from '@nestjs/common';
-import { ScheduleController } from './presentation/schedule.controller';
-import { GetMonthScheduleUseCase } from './application/use-cases/get-month-schedule.usecase';
-import { WORK_DAY_REPOSITORY } from './domain/repositories/work-day.repository';
-import {PrismaWorkDayRepository} from "./infrastructure/persistence/prisma-work-day.repository";
-import {PrismaModule} from "../../infrastructure/prisma/prisma.module";
+import { Module } from '@nestjs/common'
+import { ScheduleController } from './presentation/schedule.controller'
+import { GetMonthScheduleUseCase } from './application/use-cases/get-month-schedule.usecase'
+import { WORK_DAY_REPOSITORY } from './domain/repositories/work-day.repository'
+import { PrismaWorkDayRepository } from './infrastructure/persistence/prisma-work-day.repository'
+import { PrismaModule } from '@/infrastructure/prisma/prisma.module'
 
 @Module({
   imports: [PrismaModule],

@@ -15,13 +15,10 @@ export const CalendarButton = (props: CalendarButtonProps) => {
   return (
     <button
       onClick={isAvailable ? handleClick : undefined}
-      className={clsx(
-        'shadow rounded-lg p-2 sm:p-4 text-center transition-colors',
-        {
-          'bg-gray-200 text-gray-400 cursor-not-allowed': !isAvailable,
-          'bg-white hover:bg-blue-50 text-gray-700': isAvailable,
-        }
-      )}
+      className={clsx('shadow rounded-lg p-2 sm:p-4 text-center transition-colors', {
+        'bg-gray-600 text-gray-400 cursor-not-allowed': !isAvailable,
+        'bg-white hover:bg-blue-50 text-gray-700': isAvailable,
+      })}
     >
       <span className='font-semibold text-gray-700'>{date.getDate()}</span>
     </button>

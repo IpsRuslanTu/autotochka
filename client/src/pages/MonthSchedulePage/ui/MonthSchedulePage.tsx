@@ -16,7 +16,7 @@ const MonthSchedulePage = () => {
   }
 
   const { schedule } = useMonthSchedule(filters)
-  const calendar = prepareCalendarGrid(filters.year, filters.month, schedule)
+  const calendar = prepareCalendarGrid(filters.year, filters.month - 1, schedule)
 
   const handleBack = () => {
     const params = new URLSearchParams(searchParams)
