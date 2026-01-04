@@ -6,8 +6,7 @@ export class GetSlotsByWorkDayUsecase {
   constructor(private readonly workDayRepository: WorkDayRepository) {}
 
   async execute(workDayId: number): Promise<TimeSlot[]> {
-    const workDay =
-      await this.workDayRepository.findWorkDayWithSlotsById(workDayId)
+    const workDay = await this.workDayRepository.findWorkDayWithSlotsById(workDayId)
 
     if (!workDay) {
       throw new NotFoundException(`WorkDay with id ${workDayId} not found`)
