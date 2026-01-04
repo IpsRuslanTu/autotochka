@@ -23,4 +23,11 @@ export class PrismaWorkDayRepository implements WorkDayRepository {
 
     return rows.map((d) => new WorkDay(d.id, d.date, d.isAvailable))
   }
+
+  async findWorkDayWithSlotsById(workDayId: number): Promise<WorkDay | null> {
+    return this.prisma.workDay.findUnique({
+      where: { id: workDayId },
+      include: { timeSlots: true },
+    })
+  }
 }

@@ -22,5 +22,6 @@ export const useMonthSchedule = (props?: MonthScheduleProps) => {
 
   return {
     schedule: query.data,
+    loading: query.isPending,
   }
 }
