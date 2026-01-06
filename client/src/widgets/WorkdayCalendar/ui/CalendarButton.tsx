@@ -13,7 +13,7 @@ export const CalendarButton = (props: CalendarButtonProps) => {
     return (
       <Link
         to={`/schedule/${workDayId}/slots`}
-        className='shadow rounded-lg p-2 sm:p-4 text-center transition-colors bg-white hover:bg-blue-50 text-gray-700'
+        className='shadow rounded-lg p-2 sm:p-4 text-center bg-white hover:bg-blue-50 text-gray-700'
       >
         <span className='font-semibold text-gray-700'>{dateNum}</span>
       </Link>
@@ -21,7 +21,7 @@ export const CalendarButton = (props: CalendarButtonProps) => {
   }
 
   return (
-    <div className='shadow rounded-lg p-2 sm:p-4 text-center transition-colors bg-gray-600 text-gray-400 cursor-not-allowed'>
+    <div className='shadow rounded-lg p-2 sm:p-4 text-center bg-gray-600 text-gray-400 cursor-not-allowed'>
       <span className='font-semibold text-gray-700'>{dateNum}</span>
     </div>
   )

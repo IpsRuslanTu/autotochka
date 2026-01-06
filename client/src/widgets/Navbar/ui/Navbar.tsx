@@ -5,7 +5,7 @@ import { routes } from '@/shared/consts/routes.ts'
 export const Navbar = () => {
   return (
     <nav className='bg-blue-500 rounded-t-lg shadow-md'>
-      <div className='max-w-lg m-auto flex justify-between items-center h-14'>
+      <div className='max-w-lg m-auto px-4 py-2 flex justify-between items-center'>
         <Link to={routes.PROFILE} className='flex flex-col items-center text-white'>
           <User size={22} />
           <span className='text-xs'>Профиль</span>

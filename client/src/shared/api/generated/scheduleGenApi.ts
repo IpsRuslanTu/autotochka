@@ -6,6 +6,12 @@
  * OpenAPI spec version: 1.0
  */
 import { createInstance } from '../apiInstance'
+export interface GetSlotsSlotByWorkDayDto {
+  id: number
+  time: string
+  isAvailable: boolean
+}
+
 export interface GetMonthScheduleResponseDto {
   id: number
   date: string
@@ -25,18 +31,19 @@ export type GetMonthScheduleParams = {
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1]
 
-export const getMonthSchedule = (
-  params: GetMonthScheduleParams,
-  options?: SecondParameter<
-    typeof createInstance<GetMonthScheduleResponseDto[]>
-  >
+export const getTimeSlots = (
+  workDayId: number,
+  options?: SecondParameter<typeof createInstance<GetSlotsSlotByWorkDayDto[]>>
 ) => {
-  return createInstance<GetMonthScheduleResponseDto[]>(
-    { url: `/api/schedule`, method: 'GET', params },
-    options
-  )
+  return createInstance<GetSlotsSlotByWorkDayDto[]>({ url: `/api/schedule/${workDayId}/slots`, method: 'GET' }, options)
 }
 
-export type GetMonthScheduleResult = NonNullable<
-  Awaited<ReturnType<typeof getMonthSchedule>>
->
+export const getMonthSchedule = (
+  params: GetMonthScheduleParams,
+  options?: SecondParameter<typeof createInstance<GetMonthScheduleResponseDto[]>>
+) => {
+  return createInstance<GetMonthScheduleResponseDto[]>({ url: `/api/schedule`, method: 'GET', params }, options)
+}
+
+export type GetTimeSlotsResult = NonNullable<Awaited<ReturnType<typeof getTimeSlots>>>
+export type GetMonthScheduleResult = NonNullable<Awaited<ReturnType<typeof getMonthSchedule>>>

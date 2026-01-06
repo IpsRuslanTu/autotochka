@@ -14,6 +14,13 @@ export class ScheduleController {
   ) {}
 
   @Get(':workDayId/slots')
+  @ApiOperation({
+    operationId: 'getTimeSlots',
+  })
+  @ApiResponse({
+    status: 200,
+    type: [GetSlotsSlotByWorkDayDto],
+  })
   async getSlotsByWorkDayId(@Param('workDayId', ParseIntPipe) workDayId: number): Promise<GetSlotsSlotByWorkDayDto[]> {
     const slots = await this.getSlotsByWorkDayUsecase.execute(workDayId)
 
