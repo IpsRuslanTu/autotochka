@@ -9,7 +9,7 @@ async function bootstrap() {
 
   if (allowedOrigin) {
     app.enableCors({
-      allowedOrigin: allowedOrigin,
+      origin: allowedOrigin,
       credentials: true,
     })
   }
