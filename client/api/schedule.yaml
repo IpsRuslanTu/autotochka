@@ -1,19 +1,40 @@
 openapi: 3.0.0
 paths:
+  /api/schedule/{workDayId}/slots:
+    get:
+      operationId: getTimeSlots
+      parameters:
+        - name: workDayId
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GetSlotsSlotByWorkDayDto"
+      summary: ""
+      tags: &a1
+        - Schedule
   /api/schedule:
     get:
       operationId: getMonthSchedule
       parameters:
-        - description: Year (2025–2100)
-          name: year
-          in: query
+        - name: year
           required: true
+          in: query
+          description: Year (2025–2100)
           schema:
             type: number
-        - description: Month (1–12)
-          name: month
-          in: query
+        - name: month
           required: true
+          in: query
+          description: Month (1–12)
           schema:
             type: number
       responses:
@@ -26,8 +47,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/GetMonthScheduleResponseDto"
       summary: ""
-      tags:
-        - Schedule
+      tags: *a1
 info:
   title: schedule API
   description: API for schedule module
@@ -39,6 +59,19 @@ tags:
 servers: []
 components:
   schemas:
+    GetSlotsSlotByWorkDayDto:
+      type: object
+      properties:
+        id:
+          type: number
+        time:
+          type: string
+        isAvailable:
+          type: boolean
+      required:
+        - id
+        - time
+        - isAvailable
     GetMonthScheduleResponseDto:
       type: object
       properties:

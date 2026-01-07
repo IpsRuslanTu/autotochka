@@ -7,7 +7,18 @@ datasource db {
 }
 
 model WorkDay {
-  id        Int    @id @default(autoincrement())
-  date      DateTime @unique @db.Date
+  id          Int    @id @default(autoincrement())
+  date        DateTime @unique @db.Date
   isAvailable Boolean @default(true)
+  timeSlots   TimeSlot[]
+}
+
+model TimeSlot {
+  id          Int      @id @default(autoincrement())
+  time        String
+  isAvailable Boolean @default(true)
+  workDayId   Int
+  workDay     WorkDay  @relation(fields: [workDayId], references: [id], onDelete: Cascade)
+
+  @@unique([workDayId, time])
 }

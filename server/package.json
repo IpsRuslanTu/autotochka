@@ -18,7 +18,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "openapi:module": "ts-node scripts/generate-module-openapi.ts schedule"
+    "openapi:module": "ts-node -r tsconfig-paths/register scripts/generate-module-openapi.ts schedule"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",

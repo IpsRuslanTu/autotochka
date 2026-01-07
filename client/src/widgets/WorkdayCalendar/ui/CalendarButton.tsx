@@ -1,26 +1,28 @@
-import clsx from 'clsx'
+import { Link } from 'react-router-dom'
 
 interface CalendarButtonProps {
-  date: Date
+  workDayId: number
+  dateNum: number
   isAvailable: boolean
 }
 
 export const CalendarButton = (props: CalendarButtonProps) => {
-  const { date, isAvailable } = props
+  const { workDayId, dateNum, isAvailable } = props
 
-  const handleClick = () => {
-    // router(`/schedule/${year}-${month + 1}-${day}`)
+  if (isAvailable) {
+    return (
+      <Link
+        to={`/schedule/${workDayId}/slots`}
+        className='shadow rounded-lg p-2 sm:p-4 text-center bg-white hover:bg-blue-50 text-gray-700'
+      >
+        <span className='font-semibold text-gray-700'>{dateNum}</span>
+      </Link>
+    )
   }
 
   return (
-    <button
-      onClick={isAvailable ? handleClick : undefined}
-      className={clsx('shadow rounded-lg p-2 sm:p-4 text-center transition-colors', {
-        'bg-gray-600 text-gray-400 cursor-not-allowed': !isAvailable,
-        'bg-white hover:bg-blue-50 text-gray-700': isAvailable,
-      })}
-    >
-      <span className='font-semibold text-gray-700'>{date.getDate()}</span>
-    </button>
+    <div className='shadow rounded-lg p-2 sm:p-4 text-center bg-gray-600 text-gray-400 cursor-not-allowed'>
+      <span className='font-semibold text-gray-700'>{dateNum}</span>
+    </div>
   )
 }
