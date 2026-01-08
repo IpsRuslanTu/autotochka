@@ -20,7 +20,7 @@ export class HandleTelegramMessageUsecase {
         },
       })
     } else {
-      await this.telegramApi.sendMessage(chatId, 'Пожалуйста, нажмите кнопку выше.')
+      await this.telegramApi.sendMessage(chatId, 'Я понимаю только команду /start')
     }
   }
 
