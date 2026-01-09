@@ -10,16 +10,8 @@ import { ScheduleController } from './presentation/schedule.controller'
   imports: [PrismaModule],
   controllers: [ScheduleController],
   providers: [
-    {
-      provide: GetMonthScheduleUseCase,
-      useFactory: (repo) => new GetMonthScheduleUseCase(repo),
-      inject: [WORK_DAY_REPOSITORY],
-    },
-    {
-      provide: GetSlotsByWorkDayUsecase,
-      useFactory: (repo) => new GetSlotsByWorkDayUsecase(repo),
-      inject: [WORK_DAY_REPOSITORY],
-    },
+    GetMonthScheduleUseCase,
+    GetSlotsByWorkDayUsecase,
     {
       provide: WORK_DAY_REPOSITORY,
       useClass: PrismaWorkDayRepository,

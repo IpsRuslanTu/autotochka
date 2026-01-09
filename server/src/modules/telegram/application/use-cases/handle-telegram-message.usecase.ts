@@ -1,7 +1,12 @@
-import { TelegramApi } from '../../domain/repositories/telegram-api.interface'
+import { Inject, Injectable } from '@nestjs/common'
+import { TELEGRAM_API, type TelegramApi } from '../../domain/repositories/telegram-api.interface'
 
+@Injectable()
 export class HandleTelegramMessageUsecase {
-  constructor(private telegramApi: TelegramApi) {}
+  constructor(
+    @Inject(TELEGRAM_API)
+    private telegramApi: TelegramApi
+  ) {}
 
   async execute(chatId: number, text: string): Promise<void> {
     if (text === '/start') {
