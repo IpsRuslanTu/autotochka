@@ -1,11 +1,11 @@
 import * as crypto from 'node:crypto'
-import { Injectable } from '@nestjs/common'
-import type { UserRepository } from '@/domain/user/repositories/user.repository.interface'
+import { Inject, Injectable } from '@nestjs/common'
+import { USER_REPOSITORY, type UserRepository } from '@/domain/user/repositories/user.repository.interface'
 import { User } from '@/domain/user/entities/user.entity'
 
 @Injectable()
 export class EnsureUserUsecase {
-  constructor(private userRepository: UserRepository) {}
+  constructor(@Inject(USER_REPOSITORY) private userRepository: UserRepository) {}
 
   async execute(telegramId: string, phoneNumber: string): Promise<User> {
     let user = await this.userRepository.findByTelegramId(telegramId)
