@@ -1,9 +1,13 @@
-import { WorkDayRepository } from '../../domain/repositories/work-day.repository'
-import { NotFoundException } from '@nestjs/common'
+import { Inject, Injectable, NotFoundException } from '@nestjs/common'
+import { WORK_DAY_REPOSITORY, type WorkDayRepository } from '../../domain/repositories/work-day.repository'
 import { TimeSlot } from '@/modules/schedule/domain/entities/time-slot.entity'
 
+@Injectable()
 export class GetSlotsByWorkDayUsecase {
-  constructor(private readonly workDayRepository: WorkDayRepository) {}
+  constructor(
+    @Inject(WORK_DAY_REPOSITORY)
+    private readonly workDayRepository: WorkDayRepository
+  ) {}
 
   async execute(workDayId: number): Promise<TimeSlot[]> {
     const workDay = await this.workDayRepository.findWorkDayWithSlotsById(workDayId)

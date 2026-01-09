@@ -7,11 +7,7 @@ import { TELEGRAM_API } from './domain/repositories/telegram-api.interface'
 @Module({
   controllers: [TelegramController],
   providers: [
-    {
-      provide: HandleTelegramMessageUsecase,
-      useFactory: (api) => new HandleTelegramMessageUsecase(api),
-      inject: [TELEGRAM_API],
-    },
+    HandleTelegramMessageUsecase,
     {
       provide: TELEGRAM_API,
       useClass: TelegramApiService,
