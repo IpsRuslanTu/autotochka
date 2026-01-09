@@ -5,11 +5,12 @@ import MonthSchedulePageAsync from '@/pages/MonthSchedulePage'
 import TimeSlotsPageAsync from '@/pages/TimeSlotsPage'
 import ProfilePageAsync from '@/pages/ProfilePage'
 import { routes } from '@/shared/consts/routes.ts'
+import { Loader } from '@/shared/ui/Loader.tsx'
 import { RootLayout } from '../../../layouts/RootLayout/ui/RootLayout.tsx'
 
 export const AppRouter = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loader />}>
       <Routes>
         <Route path={routes.HOME} element={<RootLayout />}>
           <Route index element={<MonthSchedulePageAsync />} />
