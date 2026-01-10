@@ -5,9 +5,11 @@ import { TelegramModule } from '@/modules/telegram/telegram.module'
 import { EnsureUserUsecase } from './application/auth/use-cases/ensure-user.usecase'
 import { USER_REPOSITORY } from './domain/user/repositories/user.repository.interface'
 import { PrismaUserRepository } from './infrastructure/persistence/prisma-user.repository'
+import { PrismaModule } from './infrastructure/prisma/prisma.module'
 
 @Module({
   imports: [
+    PrismaModule,
     JwtModule.register({
       secret: process.env.JWT_SECRET || 'test-secret-key',
       signOptions: { expiresIn: '7d' },
