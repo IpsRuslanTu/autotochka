@@ -1,37 +1,10 @@
-import { useEffect, useState } from 'react'
+import { type ReactNode } from 'react'
+import { isTelegramWebApp } from '@/shared/lib/telegram.ts'
 
-export const TelegramGuard = ({ children }: { children: React.ReactNode }) => {
-  const [isReady, setIsReady] = useState(false)
-  const [isInTelegram, setIsInTelegram] = useState(false)
+export const TelegramGuard = ({ children }: { children: ReactNode }) => {
+  const inTelegram = isTelegramWebApp()
 
-  useEffect(() => {
-    let isCancelled = false
-
-    const checkTelegram = () => {
-      if ((window as any).Telegram?.WebApp) {
-        if (!isCancelled) {
-          setIsInTelegram(true)
-          setIsReady(true)
-          ;(window as any).Telegram.WebApp.ready()
-        }
-        return
-      }
-
-      setTimeout(checkTelegram, 50)
-    }
-
-    checkTelegram()
-
-    return () => {
-      isCancelled = true
-    }
-  }, [])
-
-  if (!isReady) {
-    return null
-  }
-
-  if (!isInTelegram) {
+  if (!inTelegram) {
     return (
       <div className='min-h-screen flex flex-col items-center justify-center bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100'>
         <div className='text-center max-w-md'>

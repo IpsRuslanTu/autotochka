@@ -18,13 +18,6 @@ export const isTelegramWebApp = (): boolean => {
   return typeof window !== 'undefined' && (window as any).Telegram?.WebApp !== undefined
 }
 
-export const getTelegramInitData = (): string | null => {
-  if (isTelegramWebApp()) {
-    return (window as any).Telegram.WebApp.initData
-  }
-  return null
-}
-
 export const getTelegramUser = () => {
   if (isTelegramWebApp()) {
     return (window as any).Telegram.WebApp.initDataUnsafe?.user || null
