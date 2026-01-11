@@ -14,12 +14,12 @@ export interface TelegramWebApp {
   ready: () => void
 }
 
-export const isTelegramWebApp = (): boolean => {
-  return typeof window !== 'undefined' && (window as any).Telegram?.WebApp !== undefined
+export const hasTelegramUser = (): boolean => {
+  return !!(window as any).Telegram?.WebApp?.initDataUnsafe?.user
 }
 
 export const getTelegramUser = () => {
-  if (isTelegramWebApp()) {
+  if (hasTelegramUser()) {
     return (window as any).Telegram.WebApp.initDataUnsafe?.user || null
   }
   return null
