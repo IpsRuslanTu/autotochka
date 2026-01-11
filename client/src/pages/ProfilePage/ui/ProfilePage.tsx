@@ -8,7 +8,7 @@ const ProfilePage = () => {
       <div className='p-4 max-w-md mx-auto'>
         <h1 className='text-2xl font-bold mb-4'>Ваш профиль</h1>
         {Object.entries(user).map((i) => {
-          if (typeof i[1] === 'string') {
+          if (typeof i[1] === 'string' || typeof i[1] === 'number') {
             return (
               <div>
                 <span>{i[0]}</span>

@@ -1,11 +1,13 @@
 import { Inject, Injectable } from '@nestjs/common'
 import { TELEGRAM_API, type TelegramApi } from '../../domain/repositories/telegram-api.interface'
+import { EnsureUserUsecase } from '@/application/auth/use-cases/ensure-user.usecase'
 
 @Injectable()
 export class HandleTelegramMessageUsecase {
   constructor(
     @Inject(TELEGRAM_API)
-    private telegramApi: TelegramApi
+    private telegramApi: TelegramApi,
+    private ensureUserUsecase: EnsureUserUsecase
   ) {}
 
   async execute(chatId: number, text: string): Promise<void> {
@@ -30,7 +32,7 @@ export class HandleTelegramMessageUsecase {
   }
 
   async handleContact(chatId: number, phoneNumber: string): Promise<void> {
-    console.log(phoneNumber)
+    await this.ensureUserUsecase.execute(String(chatId), phoneNumber)
 
     await this.telegramApi.sendMessage(chatId, 'Теперь вы можете открыть приложение:', {
       replyMarkup: {
