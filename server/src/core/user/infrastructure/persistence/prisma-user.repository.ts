@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
-import { User } from '@/domain/user/entities/user.entity'
-import { UserRepository } from '@/domain/user/repositories/user.repository.interface'
-import { PrismaService } from '../prisma/prisma.service'
+import { User } from '@/core/user/domain/user/entities/user.entity'
+import { PrismaService } from '@/infrastructure/prisma/prisma.service'
+import { UserRepository } from '../../domain/user/repositories/user.repository.interface'
 
 @Injectable()
 export class PrismaUserRepository implements UserRepository {
@@ -18,11 +18,11 @@ export class PrismaUserRepository implements UserRepository {
     const data = {
       id: user.id,
       phoneNumber: user.phoneNumber,
-      telegramId: user.telegramId ? user.telegramId : undefined,
+      telegramId: user.telegramId,
     }
 
     return await this.prisma.user.upsert({
-      where: { id: user.id },
+      where: { phoneNumber: user.phoneNumber },
       update: data,
       create: data,
     })
