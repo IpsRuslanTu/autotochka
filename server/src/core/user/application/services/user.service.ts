@@ -7,6 +7,10 @@ import crypto from 'node:crypto'
 export class UserService {
   constructor(@Inject(USER_REPOSITORY) private userRepository: UserRepository) {}
 
+  async findByTelegram(telegramId: string) {
+    return await this.userRepository.findByTelegramId(telegramId)
+  }
+
   async findOrCreateByTelegram(telegramId: string, phoneNumber: string) {
     let user = await this.userRepository.findByTelegramId(telegramId)
 
