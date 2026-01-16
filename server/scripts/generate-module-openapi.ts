@@ -3,11 +3,12 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import * as fs from 'fs'
 import * as yaml from 'yaml'
 import { resolve } from 'path'
-
-import { ScheduleModule } from '../src/modules/schedule/schedule.module'
+import { AuthModule } from '@/application/auth/auth.module'
+import { ScheduleModule } from '@/modules/schedule/schedule.module'
 
 const MODULES = {
   schedule: ScheduleModule,
+  auth: AuthModule,
 }
 
 async function generateModuleOpenApi(moduleName: string) {

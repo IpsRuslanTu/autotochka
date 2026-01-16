@@ -24,3 +24,10 @@ export const getTelegramUser = () => {
   }
   return null
 }
+
+export const getTelegramInitData = () => {
+  if (hasTelegramUser()) {
+    return (window as any).Telegram.WebApp.initData
+  }
+  return null
+}

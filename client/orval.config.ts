@@ -21,4 +21,5 @@ const buildEntityConfig = (name: string) => {
 
 export default defineConfig({
   schedule: buildEntityConfig('schedule'),
+  auth: buildEntityConfig('auth'),
 })

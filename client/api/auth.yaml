@@ -1,0 +1,48 @@
+openapi: 3.0.0
+paths:
+  /api/auth/telegram:
+    post:
+      operationId: loginByTelegram
+      parameters: []
+      requestBody:
+        required: true
+        description: ""
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginByTelegramRequestDto"
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginByTelegramResponseDto"
+      summary: ""
+      tags:
+        - Auth
+info:
+  title: auth API
+  description: API for auth module
+  version: "1.0"
+  contact: {}
+tags:
+  - name: auth
+    description: ""
+servers: []
+components:
+  schemas:
+    LoginByTelegramRequestDto:
+      type: object
+      properties:
+        initData:
+          type: string
+      required:
+        - initData
+    LoginByTelegramResponseDto:
+      type: object
+      properties:
+        accessToken:
+          type: string
+      required:
+        - accessToken

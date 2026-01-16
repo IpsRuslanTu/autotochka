@@ -6,3 +6,6 @@ npx prisma migrate dev --name <название миграции>
 
 Миграции в проде (применит все незавершенные миграции)
 npx prisma migrate deploy
+
+Для генерации описания апи 
+npm run openapi:module -- <название модуля>
