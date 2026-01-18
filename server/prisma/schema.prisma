@@ -19,6 +19,7 @@ model TimeSlot {
   isAvailable Boolean @default(true)
   workDayId   Int
   workDay     WorkDay  @relation(fields: [workDayId], references: [id], onDelete: Cascade)
+  bookings    Booking[]
 
   @@unique([workDayId, time])
 }
@@ -27,4 +28,16 @@ model User {
   id          String  @id
   phoneNumber String  @unique
   telegramId  String? @unique
+  bookings    Booking[]
+}
+
+model Booking {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  timeSlotId  Int
+  timeSlot    TimeSlot @relation(fields: [timeSlotId], references: [id])
+
+  @@unique([timeSlotId])
 }

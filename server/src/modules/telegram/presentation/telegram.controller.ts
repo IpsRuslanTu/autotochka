@@ -6,11 +6,6 @@ import type { TelegramUpdate } from '../domain/types/telegram.types'
 export class TelegramController {
   constructor(private usecase: HandleTelegramMessageUsecase) {}
 
-  @Post('login')
-  login(@Body('initData') initData: string) {
-    console.log(initData)
-  }
-
   @Post()
   async handleWebhook(@Body() update: TelegramUpdate) {
     const message = update.message
