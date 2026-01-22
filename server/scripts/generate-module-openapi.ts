@@ -5,10 +5,12 @@ import * as yaml from 'yaml'
 import { resolve } from 'path'
 import { AuthModule } from '@/application/auth/auth.module'
 import { ScheduleModule } from '@/modules/schedule/schedule.module'
+import { BookingModule } from '@/modules/booking/booking.module'
 
 const MODULES = {
   schedule: ScheduleModule,
   auth: AuthModule,
+  booking: BookingModule,
 }
 
 async function generateModuleOpenApi(moduleName: string) {

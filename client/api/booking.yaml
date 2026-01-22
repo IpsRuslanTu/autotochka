@@ -1,0 +1,36 @@
+openapi: 3.0.0
+paths:
+  /api/booking:
+    post:
+      operationId: createBooking
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateBookingRequestDto"
+      responses:
+        "200":
+          description: ""
+      summary: ""
+      tags:
+        - Booking
+info:
+  title: booking API
+  description: API for booking module
+  version: "1.0"
+  contact: {}
+tags:
+  - name: booking
+    description: ""
+servers: []
+components:
+  schemas:
+    CreateBookingRequestDto:
+      type: object
+      properties:
+        timeSlotId:
+          type: number
+      required:
+        - timeSlotId

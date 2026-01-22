@@ -1,13 +1,20 @@
 import { useParams } from 'react-router-dom'
 import { useTimeSlots } from '@/entities/schedule'
+import { useCreateBooking } from '@/features/createBooking/model/services/useCreateBooking.ts'
+import { toast } from 'react-toastify'
 
 const TimeSlotsPage = () => {
   const { workDayId } = useParams()
 
   const { slots } = useTimeSlots(Number(workDayId))
 
+  const onSuccess = () => {
+    toast.success('Бронирование успешно создано!')
+  }
+  const { createBooking } = useCreateBooking(onSuccess, () => toast.error('Не удалось создать бронирование'))
+
   const handleClick = (slotId: number) => {
-    alert(slotId)
+    createBooking(slotId)
   }
 
   return (

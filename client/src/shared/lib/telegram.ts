@@ -15,19 +15,19 @@ export interface TelegramWebApp {
 }
 
 export const hasTelegramUser = (): boolean => {
-  return !!(window as any).Telegram?.WebApp?.initDataUnsafe?.user
+  return !!window.Telegram?.WebApp?.initDataUnsafe?.user
 }
 
 export const getTelegramUser = () => {
   if (hasTelegramUser()) {
-    return (window as any).Telegram.WebApp.initDataUnsafe?.user || null
+    return window.Telegram.WebApp.initDataUnsafe?.user || null
   }
   return null
 }
 
 export const getTelegramInitData = () => {
   if (hasTelegramUser()) {
-    return (window as any).Telegram.WebApp.initData
+    return window.Telegram.WebApp.initData
   }
   return null
 }
